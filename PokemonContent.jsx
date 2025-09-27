@@ -49,10 +49,14 @@ const Items =({name,image,base})=>{
 }
 
 
-export default function PokemonContent() {
+export default function PokemonContent({search}) {
 
+  const filterData= search.length>0 ? PokemonData.filter((element,index)=>
+   element.name.english.toLowerCase().includes(search.toLowerCase())
+  ) : PokemonData;
 
 const renderItem =({item}) =>{
+  if (!item || !item.base) return null;
     return(
         <Items name={item.name} image={item.image.hires} base={item.base}/>
     )
@@ -61,7 +65,7 @@ const renderItem =({item}) =>{
   return (
     <View style={styles.container}>
       <FlatList
-      data={PokemonData}
+      data={filterData}
       renderItem={renderItem}
       keyExtractor={item=>item.id.toString()}
       />

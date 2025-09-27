@@ -1,13 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from './NavBar'
 import PokemonContent from './PokemonContent'
 
 const App = () => {
+const [search,setSearch] =useState('')
+
   return (
     <View style={styles.container}> 
-      <NavBar />
-      <PokemonContent />
+      <NavBar search={search} setSearch={setSearch}/>
+      <PokemonContent search={search}/>
     </View>
   )
 }
